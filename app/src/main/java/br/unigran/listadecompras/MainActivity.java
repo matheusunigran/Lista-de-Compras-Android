@@ -35,13 +35,30 @@ public class MainActivity extends AppCompatActivity {
         listagem.setAdapter(adapter);
     }
 
+    //verifica se o usuário colocou um item com as informações corretas
+    public boolean verificar(){
+        String nomeProduto = nome.getText().toString();
+        String marcaProduto = marca.getText().toString();
+        String qtdProduto = qtd.getText().toString();
+        if ((nomeProduto.equals(null) || marcaProduto.equals(null) || qtdProduto.equals(null))
+                || (nomeProduto.equals("") || marcaProduto.equals("") || (qtdProduto.equals("")))) {
+            Toast.makeText(this, "Adicione um item", Toast.LENGTH_SHORT).show();
+            return false;
+        } else{
+            return true;
+        }
+    }
+
     public void salvar(View view){
-        Produto produto =new Produto();
-        produto.setNome(nome.getText().toString());
-        produto.setMarca(marca.getText().toString());
-        produto.setQuantidade(qtd.getText().toString());
-        dados.add(produto);
-        Toast.makeText(this, "Salvo com sucesso", Toast.LENGTH_SHORT).show();
+        if(verificar()){
+            Produto produto =new Produto();
+            produto.setNome(nome.getText().toString());
+            produto.setMarca(marca.getText().toString());
+            produto.setQuantidade(qtd.getText().toString());
+            dados.add(produto);
+            Toast.makeText(this, "Salvo com sucesso", Toast.LENGTH_SHORT).show();
+        }
+
     }
 
 }
